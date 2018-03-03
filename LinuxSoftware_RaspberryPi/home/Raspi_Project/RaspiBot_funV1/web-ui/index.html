@@ -1,0 +1,191 @@
+<!-- RaspiBot Web UI, by Vo Nguyen Duy. -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<title>RaspiBot - VND</title>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="javascript.js"></script>
+</head>
+<body onLoad="load()">
+
+<div border="1" style=" margin:0 auto;">
+	
+	<table border="1">
+		<tr>
+			<td>
+				<table border="1" style="width:200px;">
+				
+						<tr  height="5"  >	
+							<td colspan="2"  style="background-color:black;"  >  </td>
+						</tr>	
+						<tr style="vertical-align:text-bottom;" >
+								<td style="background-color:black;text-align:center;" > 	<font color="white" size="2"> Distance Track</font> </td>
+								<td style="text-align:center;" width="33"> <button  type="button" onclick="toggle('DISTANCE');"> <span  class="DISTANCE_button">X </span></button> </td>
+						</tr>								
+						<tr  height="40" style="text-align:center;" >
+								<td colspan="2" >  <font size="3"> <div class="DISTANCE"></div> </font> </td>
+						</tr>
+						<tr  height="5"  >	
+							<td colspan="2"  style="background-color:black;"  >  </td>
+						</tr>
+						
+						<tr style="vertical-align:text-bottom;" >
+								<td  style="background-color:black; text-align:center;" > 	<font color="white"  size="2"> Speed Track</font> </td>
+								<td style="text-align:center;" >	<button type="button" onclick="toggle('SPEED');"> <span class="SPEED_button">X </span></button> </td>	
+						</tr>
+						
+						<tr >
+							<td colspan="1"style="text-align:center;" > <input id="SPEED" type="range" min="0" max="9999" value="0"  onchange="SPEEDUpdate(0);" /> </td>
+							<td colspan="1" style="text-align:center;"> <strong><output id="SPEEDpreview">&nbsp;</output></strong> </td
+						</tr>	
+						
+						<tr   height="40" style="text-align:center;" >
+								<td colspan="2" >  <font size="3"> <div class="SPEED"></div> </font> </td>
+						</tr>
+						<tr  height="5"  >	
+							<td colspan="2"  style="background-color:black;"  >  </td>
+						</tr>		
+						
+						<tr style="vertical-align:text-bottom;" >
+								<td style="background-color:black; text-align:center;" > <font color="white" size="3"> Range Detection </font> </td>
+								<td style="text-align:center;" >	<button type="button" onclick="toggle('ULTRASONIC');"> <span class="ULTRASONIC_button">X </span></button> </td>
+						</tr>
+						<tr   height="50" style="text-align:center;" >
+								<td	colspan="2" >  <font size="3"> <div class="sona"></div> </font></td>
+						</tr>					
+						<tr  height="5"  height="5">	
+							<td colspan="2"  style="background-color:black;"  >  </td>
+						</tr>	
+				</table>
+			</td>
+			
+			<td style="background-color:black;" >
+				<div style="text-align:center;" height="100" ><font color="white" size="6"> RaspiBot - VND</font>  </div>
+				<div id="webcam" border="0" style="width:320px;height:240px;background-color:gray;"> </div>
+			</td>
+			<td>
+			  <table border="1" > 		
+				<tr style="border:none;" height="5" >	
+							<td colspan="4"  style="background-color:black;"  >  </td>		
+				</tr>
+				<tr style="border:none;">	
+							<td style="text-align:center;" width="33">	<button type="button" onclick="toggle('CAMERA');"> <span  class="CAMERA_button">X </span></button> </td>
+							</td>
+							<td colspan="3"  style="background-color:black"  > <font color="white" size="3"> <Center> Camera </center></font>
+							</td> 			
+				</tr>		
+
+				<tr  border="0">
+						<td colspan="4"   style="text-align:center;"  >
+								<canvas id="myCanvas" width="200"  height="200" onkeydown= "CAM_MOUSE();" ></canvas>
+						</td>
+				</tr>	
+			
+				<tr style="border:none;" height="5" >	
+							<td colspan="4"  style="background-color:black;"  >  </td>		
+				</tr>	
+				<tr style="border:none;">	
+							<td style="text-align:center;" >	<button type="button" onclick="toggle('LED');"> <span class="LED_button">X </span></button> </td>
+							<td colspan="3"  style="background-color:black"  > <font color="white" size="3"> <Center> LED </center></font>	</td> 			
+				</tr>		
+
+				<tr style="border:none;" height="5" >	
+							<td colspan="4"  style="background-color:black;"  >  </td>		
+				</tr>	
+			
+						
+			</td>
+		</tr>
+	</table>
+</div>
+
+<tr style="border:none;">
+	<div border="0" style=" margin:0 auto;">	
+		<tr style="border:none;" style="text-align:center;">
+			<td colspan="1" style="text-align:center;">
+				<table border="0" style="text-align:center;" > 		
+					<tr style="border:none;">
+						<td style="text-align:center;" width="40">	</td>
+						<td style="text-align:center;">		</td>
+						<td  style="text-align:center;">
+							<a href="#" onMouseDown="set('UP', 1);" onMouseUp="set('UP', 0);" ><img src="UP.jpg" style="border:none;" width="30" height="30" /></a></a>
+						</td>
+						<td style="text-align:center;"></td>
+						<td style="text-align:center;" width="40"></td>
+					</tr>	
+					<tr style="border:none;">
+						<td style="text-align:center;" width="40">			</td>
+						<td  style="text-align:center;"> 
+							<a href="#" onMouseDown="set('LEFT', 1);" onMouseUp="set('LEFT', 0);" ><img src="LEFT.jpg" style="border:none;" width="30" height="30"/></a></a>
+						</td>
+						<td  style="text-align:center;">			</td>
+						<td  style="text-align:center;">      
+							<a href="#" onMouseDown="set('RIGHT', 1);" onMouseUp="set('RIGHT', 0);" ><img src="RIGHT.jpg" style="border:none;"width="30" height="30"/></a></a>
+						</td>	
+						<td style="text-align:center;" width="40">		</td>
+					</tr>	
+					<tr style="border:none;">
+						<td style="text-align:center;" width="40">			</td>
+			
+						<td style="text-align:center;">					</td>
+						<td  style="text-align:center;">
+							<a href="#" onMouseDown="set('DOWN', 1);" onMouseUp="set('DOWN', 0);" ><img src="DOWN.jpg" style="border:none;" width="30" height="30"/></a></a>
+						</td>
+						<td style="text-align:center;">	</td>
+						<td style="text-align:center;" width="40">	</td>
+					</tr>	
+				</table>
+			</td>
+			<td colspan="1" border="1" style="text-align:center;"> 
+				<table border="1" style="width:140px; text-align:center;" > 		
+					<tr style="border:none;">
+						<td width="30" style="text-align:center;" >
+							<button type="button" onclick="FunctionSwitch(1);"> <span class="FaceDetect_button"> _ </span></button>
+						</td>
+						<td style="background-color:black; text-align:Left;" > <font color="white" size="2"> Face Detection </font> </td>
+					</tr>	
+					<tr style="border:none;">
+						<td style="text-align:center;" >
+							<button type="button" onclick="FunctionSwitch(2);"> <span class="Autonomy_button"> _ </span></button>
+						</td>
+						<td  style="background-color:black; text-align:Left;" > <font color="white" size="2"> Autonomy </font> </td>
+					</tr>	
+					<tr style="border:none;">
+						<td style="text-align:center;" >
+							<button type="button" onclick="FunctionSwitch(3);"> <span class="ObjectDetect_button"> _ </span></button>
+						</td>
+						<td style="background-color:black; text-align:Left;" > <font color="white" size="2"> Object Detection </font> </td>
+					</tr>	
+				</table>
+			</td>
+			<td colspan="0" style="text-align:center;">
+				<table border="0" style="text-align:center;" > 		
+					<tr style="border:none;">	
+						<td style="text-align:center;" >
+							<button type="button" onclick="alert('The Raspbot is turning off...');set ('POWER','1');"> II </button>
+						</td>
+						<td width="165" style="background-color:black; text-align:Left;" > <font color="white" size="2">  Shutdown Rasbot </font> </td>
+
+					</tr>	
+					<tr style="border:none;">
+						<td  style="text-align:center;">  
+							<button type="button" onclick="alert('The Raspbot is restarting...'); set ('POWER','2'); ">O</button>
+						</td>
+						<td style="background-color:black; text-align:Left;" > <font color="white" size="2">  Restart Rasbot</font> </td>
+					</tr>	
+				</table>
+			</td>
+			
+			</td>
+			
+		</tr>	
+		
+		
+	</div>
+	
+</tr>
+
+  </body>
+</html>

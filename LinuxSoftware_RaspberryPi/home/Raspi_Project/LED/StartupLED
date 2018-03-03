@@ -1,0 +1,14 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          StartupLED
+# Required-Start:   
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: StartupLED
+# Description:       StartupLED
+### END INIT INFO
+
+
+    echo " - - Start LED indication - - "
+    sudo /home/pi/Raspi_Project/LED/run &

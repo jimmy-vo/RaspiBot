@@ -1,0 +1,1 @@
+/home/pi/Raspi_Project/Raspibot/RaspiBot_funV1/code/build/CMakeFiles/RaspiBot.dir

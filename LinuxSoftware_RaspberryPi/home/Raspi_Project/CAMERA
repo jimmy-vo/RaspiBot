@@ -1,0 +1,21 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          Camera
+# Required-Start:   
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Camera
+# Description:       Camera
+### END INIT INFO
+
+case "$1" in
+  start)
+    	echo "Start Streaming"
+	export LD_LIBRARY_PATH=/home/pi/Setup/mjpg-streamer-master/mjpg-streamer-experimental/ && /home/pi/Setup/mjpg-streamer-master/mjpg-streamer-experimental/mjpg_streamer -i  "input_raspicam.so -fps 30 -x 320 -y 240  -quality 6 -vf -hf -vs" & 
+    ;;
+  stop)
+	echo "Clean all"
+	sudo killall mjpg_streamer
+    ;;
+esac

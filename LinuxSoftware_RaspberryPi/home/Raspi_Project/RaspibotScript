@@ -1,0 +1,28 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          RaspibotScript
+# Required-Start:   
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: RaspibotScript
+# Description:       RaspibotScript
+### END INIT INFO
+
+case "$1" in
+  start)
+	echo "Clean all"
+	sudo killall RaspiBot
+	
+	echo "Running App"
+	sudo /home/pi/Raspi_Project/Raspibot/RaspibotV3/code/RaspiBot
+    ;;
+  stop)
+	echo "Clean all"
+	sudo killall RaspiBot
+    ;;
+  build)
+	echo "Clean all"
+	sudo make /home/pi/Raspi_Project/Raspibot/RaspibotV3/code/RaspiBot
+    ;;
+esac
